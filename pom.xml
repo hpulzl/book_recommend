@@ -7,8 +7,16 @@
   <version>1.0-SNAPSHOT</version>
   <name>book_recommend Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <build>
+    <finalName>book_recommend</finalName>
+  </build>
+  <!-- spring boot 父节点依赖, 引入这个之后相关的引入就不需要添加version配置， spring boot会自动选择最合适的版本进行添加。 -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.3.3.RELEASE</version>
+  </parent>
   <dependencies>
-
     <!-- jsoup HTML parser library @ http://jsoup.org/ -->
     <dependency>
       <groupId>org.jsoup</groupId>
@@ -16,14 +24,30 @@
       <version>1.10.2</version>
     </dependency>
 
+    <!-- spring-boot start-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- spring-boot end -->
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <version>RELEASE</version>
     </dependency>
   </dependencies>
-  <build>
-    <finalName>book_recommend</finalName>
-  </build>
 </project>
