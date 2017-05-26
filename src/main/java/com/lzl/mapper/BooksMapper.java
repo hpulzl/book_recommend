@@ -7,6 +7,6 @@ import com.lzl.bean.Books;
  * @Date: create in 15:55 17/5/25.
  * @description:
  */
-public interface BooksMapper extends BaseMapper<Books>{
+public interface BooksMapper extends com.lzl.util.MyMapper<Books> {
 
 }

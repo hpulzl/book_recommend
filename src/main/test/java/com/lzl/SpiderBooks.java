@@ -2,11 +2,16 @@ package com.lzl;
 
 
 import com.lzl.bean.Book;
+import com.lzl.spider.task.DouBanSpiderTask;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +22,11 @@ import java.util.List;
  * @Date: create in 19:25 17/5/22.
  * @description:
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = RecommendApplication.class)
 public class SpiderBooks {
+    @Autowired
+    private DouBanSpiderTask douBanSpiderTask;
     @Test
     public void test(){
         try {
@@ -86,5 +95,9 @@ public class SpiderBooks {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @Test
+    public void testTask(){
+        douBanSpiderTask.sechdule();
     }
 }

@@ -10,6 +10,7 @@ public class RuleBo {
     public static final int GET = 2;
     private String url; //地址
     private String startTag;//开始标签
+    private int postType; //请求类型
 
     public String getUrl() {
         return url;
@@ -25,5 +26,23 @@ public class RuleBo {
 
     public void setStartTag(String startTag) {
         this.startTag = startTag;
+    }
+
+    public int getPostType() {
+        return postType;
+    }
+
+    public void setPostType(int postType) {
+        this.postType = postType;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("RuleBo{");
+        sb.append("url='").append(url).append('\'');
+        sb.append(", startTag='").append(startTag).append('\'');
+        sb.append(", postType=").append(postType);
+        sb.append('}');
+        return sb.toString();
     }
 }

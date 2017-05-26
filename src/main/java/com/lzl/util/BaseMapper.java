@@ -1,6 +1,4 @@
-package com.lzl.mapper;
-
-import com.lzl.util.MyMapper;
+package com.lzl.util;
 
 /**
  * @Author: li_zhilei
