@@ -73,6 +73,11 @@
       <groupId>commons-dbcp</groupId>
       <artifactId>commons-dbcp</artifactId>
     </dependency>
+    <!-- mysql 数据库驱动. -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

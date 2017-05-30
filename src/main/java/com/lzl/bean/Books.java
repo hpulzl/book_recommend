@@ -15,7 +15,7 @@ public class Books {
 
     private String publishCompany;
 
-    private Date publishAt;
+    private String publishAt;
 
     private Date createAt;
 
@@ -67,11 +67,11 @@ public class Books {
         this.publishCompany = publishCompany;
     }
 
-    public Date getPublishAt() {
+    public String getPublishAt() {
         return publishAt;
     }
 
-    public void setPublishAt(Date publishAt) {
+    public void setPublishAt(String publishAt) {
         this.publishAt = publishAt;
     }
 

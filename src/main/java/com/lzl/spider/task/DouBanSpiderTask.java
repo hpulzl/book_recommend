@@ -2,10 +2,12 @@ package com.lzl.spider.task;
 
 
 import com.lzl.bean.Books;
+import com.lzl.service.BooksService;
 import com.lzl.spider.bo.RuleBo;
 import com.lzl.spider.util.SpiderUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -25,10 +27,21 @@ import java.util.List;
 public class DouBanSpiderTask {
     @Value("${douban_url}")
     private String url;
+    @Autowired
+    private BooksService booksService;
     public void sechdule(){
         RuleBo ruleBo = new RuleBo();
-        ruleBo.setUrl(url);
         ruleBo.setStartTag("div[class=bd doulist-subject]");
+        int start=0;
+        while(true){
+            ruleBo.setUrl(url+"?start="+start+"&sort=seq&sub_type=");
+            saveBooks(ruleBo);
+            start = start + 25;
+            if(start > 450)
+                break;
+        }
+    }
+    private void saveBooks(RuleBo ruleBo){
         SpiderUtil spiderUtil = new SpiderUtil(ruleBo);
         Elements elements = spiderUtil.getSelect();
         List<Books> list = new ArrayList<>();
@@ -48,25 +61,36 @@ public class DouBanSpiderTask {
                     b.setScore(Double.parseDouble(scoreStr));
                 }
             }catch (Exception e){
-                System.out.println("score = " + score);
                 e.printStackTrace();
             }
-            //获取类型
-            Elements strEle = element.getElementsByClass("abstract");
-            setAbstractEle(strEle.text());
+            //获取others
+            Elements others = element.getElementsByClass("abstract");
+            String[] strs = setAbstractEle(others.text());
+            for (int i=0;i<strs.length;i++){
+                b.setAuthor(strs[0]);
+                b.setPublishCompany(strs[1]);
+                b.setPublishAt(strs[2]);
+            }
             list.add(b);
         }
+        booksService.batchSave(list);
     }
-    private void setAbstractEle(String strEle){
+    private String[] setAbstractEle(String strEle){
         Assert.notNull(strEle,"strEle 信息不能为空");
         String str = strEle.replaceAll(" ",",").replaceAll(":","");
-        System.out.println("str = " + str);
         String[] splitStr = str.split(",");
-        String[] useArr = new String[]{};
+        String[] useArr = new String[3];
+        int yIndex=0;
         for (String s : splitStr){
-            if(s.equals("作者") || s.equals("")||s.equals("")){
-
+            if(s.equals("作者") || s.equals("出版社")
+                    ||s.equals("出版年")||s.contains("[")){
+                continue;
+            }
+            useArr[yIndex++]=s;
+            if(yIndex > 2){
+                yIndex=0;
             }
         }
+        return useArr;
     }
 }

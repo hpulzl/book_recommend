@@ -3,6 +3,7 @@ package com.lzl;
 
 import com.lzl.bean.Book;
 import com.lzl.spider.task.DouBanSpiderTask;
+import com.lzl.spider.task.NovelSpiderTask;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,6 +28,8 @@ import java.util.List;
 public class SpiderBooks {
     @Autowired
     private DouBanSpiderTask douBanSpiderTask;
+    @Autowired
+    private NovelSpiderTask novelSpiderTask;
     @Test
     public void test(){
         try {
@@ -97,7 +100,11 @@ public class SpiderBooks {
         }
     }
     @Test
-    public void testTask(){
+    public void testDouBanTask(){
         douBanSpiderTask.sechdule();
+    }
+    @Test
+    public void testNovelTask(){
+        novelSpiderTask.sechdule();
     }
 }

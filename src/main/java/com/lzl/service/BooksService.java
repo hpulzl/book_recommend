@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 /**
  * @Author: li_zhilei
  * @Date: create in 16:01 17/5/25.
@@ -19,5 +21,9 @@ public class BooksService {
     public void save(Books books){
         Assert.notNull(books.getName(),"书名不能为空");
         booksMapper.insert(books);
+    }
+    public void batchSave(List<Books> list){
+        Assert.notNull(list,"list 集合不能为空");
+        booksMapper.insertList(list);
     }
 }
