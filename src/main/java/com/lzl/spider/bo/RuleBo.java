@@ -8,6 +8,7 @@ package com.lzl.spider.bo;
 public class RuleBo {
     public static final int POST = 1;
     public static final int GET = 2;
+    public static final int DEFAULT_TYPE = -1;
     private String url; //地址
     private String startTag;//开始标签
     private int postType; //请求类型

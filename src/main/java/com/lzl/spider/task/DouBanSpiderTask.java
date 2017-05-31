@@ -7,6 +7,8 @@ import com.lzl.spider.bo.RuleBo;
 import com.lzl.spider.util.SpiderUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -25,11 +27,13 @@ import java.util.List;
 @Component
 @PropertySource("classpath:bookResources.properties")
 public class DouBanSpiderTask {
+    private final Logger logger = LoggerFactory.getLogger(DouBanSpiderTask.class);
     @Value("${douban_url}")
     private String url;
     @Autowired
     private BooksService booksService;
     public void sechdule(){
+        logger.info("开始抓取豆瓣图书数据...");
         RuleBo ruleBo = new RuleBo();
         ruleBo.setStartTag("div[class=bd doulist-subject]");
         int start=0;
