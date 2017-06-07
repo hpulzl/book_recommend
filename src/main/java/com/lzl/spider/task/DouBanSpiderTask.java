@@ -77,7 +77,7 @@ public class DouBanSpiderTask {
             }
             list.add(b);
         }
-        booksService.batchSave(list);
+     //   booksService.batchSave(list);
     }
     private String[] setAbstractEle(String strEle){
         Assert.notNull(strEle,"strEle 信息不能为空");
