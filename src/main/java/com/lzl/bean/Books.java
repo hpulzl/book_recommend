@@ -82,19 +82,4 @@ public class Books {
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Books{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", imgUrl='").append(imgUrl).append('\'');
-        sb.append(", score=").append(score);
-        sb.append(", author='").append(author).append('\'');
-        sb.append(", publishCompany='").append(publishCompany).append('\'');
-        sb.append(", publishAt=").append(publishAt);
-        sb.append(", createAt=").append(createAt);
-        sb.append('}');
-        return sb.toString();
-    }
 }

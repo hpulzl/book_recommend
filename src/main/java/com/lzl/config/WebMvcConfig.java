@@ -28,6 +28,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.lang.reflect.Method;
+
 /**
  * @author liuzh_3nofxnp
  * @since 2015-12-19 16:16
@@ -47,7 +49,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .allowedOrigins("*")
                 .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE");
     }
-
 
 //    @Override
 //    public void configureViewResolvers(ViewResolverRegistry registry) {

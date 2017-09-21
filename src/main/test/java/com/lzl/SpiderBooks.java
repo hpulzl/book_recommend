@@ -2,6 +2,8 @@ package com.lzl;
 
 
 import com.lzl.bean.Book;
+import com.lzl.bean.Books;
+import com.lzl.service.BooksService;
 import com.lzl.spider.task.DouBanSpiderTask;
 import com.lzl.spider.task.NovelSpiderTask;
 import org.jsoup.Jsoup;
@@ -12,7 +14,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +36,10 @@ public class SpiderBooks {
     private DouBanSpiderTask douBanSpiderTask;
     @Autowired
     private NovelSpiderTask novelSpiderTask;
+    @Autowired
+    private BooksService booksService;
+    @Autowired
+    private DataSourceTransactionManager transactionManager;
     @Test
     public void test(){
         try {
@@ -106,5 +116,26 @@ public class SpiderBooks {
     @Test
     public void testNovelTask(){
         novelSpiderTask.sechdule();
+    }
+
+    @Test
+    public void testSave(){
+        Books books = new Books();
+        books.setName("不是所有人都叫小红");
+        booksService.save(books);
+    }
+
+    @Test
+    public void testTransaction(){
+        TransactionDefinition td = new DefaultTransactionDefinition();
+        TransactionStatus status = transactionManager.getTransaction(td);
+        try {
+            Books books = new Books();
+            books.setName("不是所有人都叫小红");
+            booksService.save(books);
+        } catch (Exception e) {
+            transactionManager.rollback(status);
+        }
+        transactionManager.commit(status);
     }
 }

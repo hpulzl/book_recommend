@@ -30,20 +30,23 @@ public class DouBanSpiderTask {
     private final Logger logger = LoggerFactory.getLogger(DouBanSpiderTask.class);
     @Value("${douban_url}")
     private String url;
+    @Value("${hello_ll}")
+    private String hell;
     @Autowired
     private BooksService booksService;
     public void sechdule(){
-        logger.info("开始抓取豆瓣图书数据...");
-        RuleBo ruleBo = new RuleBo();
-        ruleBo.setStartTag("div[class=bd doulist-subject]");
-        int start=0;
-        while(true){
-            ruleBo.setUrl(url+"?start="+start+"&sort=seq&sub_type=");
-            saveBooks(ruleBo);
-            start = start + 25;
-            if(start > 450)
-                break;
-        }
+        System.out.println("hell = " + hell);
+//        logger.info("开始抓取豆瓣图书数据...");
+//        RuleBo ruleBo = new RuleBo();
+//        ruleBo.setStartTag("div[class=bd doulist-subject]");
+//        int start=0;
+//        while(true){
+//            ruleBo.setUrl(url+"?start="+start+"&sort=seq&sub_type=");
+//            saveBooks(ruleBo);
+//            start = start + 25;
+//            if(start > 450)
+//                break;
+//        }
     }
     private void saveBooks(RuleBo ruleBo){
         SpiderUtil spiderUtil = new SpiderUtil(ruleBo);

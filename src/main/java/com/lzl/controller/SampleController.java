@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleController {
     @RequestMapping("hi")
     public String sayHello(){
-        return "hello recommend";
+        return "太热就提交两个都是";
     }
 }
