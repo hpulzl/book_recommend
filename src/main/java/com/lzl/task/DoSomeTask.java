@@ -13,6 +13,6 @@ public class DoSomeTask {
 
     @Scheduled(fixedRate = 5000)
     public void doTask(){
-        System.out.println("true = " + true);
+//        System.out.println("true = " + true);
     }
 }

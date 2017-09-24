@@ -38,7 +38,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     public SqlSessionFactory sqlSessionFactoryBean() {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setTypeAliasesPackage("cn.vobile.hss.model");
+        bean.setTypeAliasesPackage("com.lzl.bean");
 
         // 支持下划线到驼峰
         org.apache.ibatis.session.Configuration conf = new org.apache.ibatis.session.Configuration();
