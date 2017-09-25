@@ -1,5 +1,7 @@
 package com.lzl.controller;
 
+import com.lzl.redisdao.UseRedisDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("sample")
 public class SampleController {
+
+    @Autowired
+    private UseRedisDao useRedisDao;
+
     @RequestMapping("hi")
-    public String sayHello(){
-        return "太热就提交两个都是";
+    public String sayHello(String key,String value){
+        useRedisDao.setValue(key,value);
+        return useRedisDao.getValue(key);
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisNode;
+import org.springframework.data.redis.connection.RedisSentinelConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -39,6 +41,31 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     @Value("${spring.redis.password}")
     private String password;
 
+    @Value("${spring.redis.sentinel.nodes}")
+    private String redisNodes;
+
+    @Value("${spring.redis.sentinel.master}")
+    private String master;
+
+
+    /**
+     * redis哨兵配置
+     * @return
+     */
+    @Bean
+    public RedisSentinelConfiguration redisSentinelConfiguration(){
+        RedisSentinelConfiguration configuration = new RedisSentinelConfiguration();
+        String[] host = redisNodes.split(",");
+        for(String redisHost : host){
+            String[] item = redisHost.split(":");
+            String ip = item[0];
+            String port = item[1];
+            configuration.addSentinel(new RedisNode(ip, Integer.parseInt(port)));
+        }
+        configuration.setMaster(master);
+        return configuration;
+    }
+
     /**
      * 连接redis的工厂类
      *
@@ -46,7 +73,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
      */
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
-        JedisConnectionFactory factory = new JedisConnectionFactory();
+        JedisConnectionFactory factory = new JedisConnectionFactory(redisSentinelConfiguration());
         factory.setHostName(host);
         factory.setPort(port);
         factory.setTimeout(timeout);
