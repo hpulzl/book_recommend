@@ -1,8 +1,5 @@
 #!/bin/sh
 #redis启动和关闭
-redis_maater="/Users/vobile_lzl/redis_master_s"
-redis_slaver_1="/Users/vobile_lzl/redis_slaver1_s"
-reids_slaver_2="/Users/vobile_lzl/redis_slaver2_s"
 start="start"
 stop="stop"
 error="命令有误！请输入start or stop"
@@ -32,7 +29,7 @@ function toStart()
 }
 function toStop()
 {
-	./redis-cli shutdown
+	./redis-cli -h 127.0.0.1 -p $1 shutdown
 }
 # 关闭redis ./redis-cli shutdown
 function stop()
@@ -40,15 +37,15 @@ function stop()
 	echo "stop redis begin"
 	cd ~
 	cd redis_master_s/
-	toStop
+	toStop 6379
 	echo "master stop"
 	cd ~
 	cd redis_slaver2_s/
-	toStop
+	toStop 6377
 	echo "slaver2 stop"
 	cd ~
 	cd redis_slaver1_s
-	toStop
+	toStop 6378
 	echo "slaver1 stop"
 	echo "stop end "
 }

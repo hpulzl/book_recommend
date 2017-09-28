@@ -109,7 +109,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
 
         //set value serializer
-        template.setDefaultSerializer(jackson2JsonRedisSerializer);
+//        template.setDefaultSerializer(jackson2JsonRedisSerializer);
         template.setValueSerializer(jackson2JsonRedisSerializer);
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
 
