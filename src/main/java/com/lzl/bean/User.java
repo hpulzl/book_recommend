@@ -1,15 +1,6 @@
 package com.lzl.bean;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class User {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -68,18 +59,5 @@ public class User {
 
     public void setAccount(String account) {
         this.account = account;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("User{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", sex='").append(sex).append('\'');
-        sb.append(", age=").append(age);
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", account='").append(account).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 }

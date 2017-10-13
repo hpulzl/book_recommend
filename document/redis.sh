@@ -1,5 +1,8 @@
 #!/bin/sh
 #redis启动和关闭
+redis_maater="/Users/vobile_lzl/redis_master_s"
+redis_slaver_1="/Users/vobile_lzl/redis_slaver1_s"
+reids_slaver_2="/Users/vobile_lzl/redis_slaver2_s"
 start="start"
 stop="stop"
 error="命令有误！请输入start or stop"
